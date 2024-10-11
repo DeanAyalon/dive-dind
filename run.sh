@@ -26,7 +26,7 @@ load() {
 
     # Save image to archive
     mkdir -p $dir
-    rm $dir/$archive > /dev/null 2>&1
+    [ -f $dir/$archive ] && rm $dir/$archive || exit 1
     docker save -o $dir/$archive "$1"
 
     # Copy archive to dive-dind
@@ -47,6 +47,7 @@ dive() {
 # Context
 cd "$(dirname "$0")"
 
+# Commands
 [ -z "$1" ] && help && exit 1
 case "$1" in
     # docker save, docker cp, docker exec docker import
