@@ -10,6 +10,18 @@ Instead - Enter Docker-in-Docker!<br>
 The DinD container runs the regular docker image store, with Docker's contents managed within a volume
 
 # Use
+## Script
+The [`run.sh`](./run.sh) script is a wrapper around dive that starts the DinD automatically and offers automation for the following features:
+- **Local images:** Save a local image, load it into DinD and Dive
+  ```sh
+  ./run.sh local [image]
+  ```
+- **Clean:** Removes the DinD and volume, cleans up all stored images
+  ```sh
+  ./run.sh clean
+  ```
+
+## Manual execution
 ```sh
 docker compose up -d dive-dind
 sleep 2
