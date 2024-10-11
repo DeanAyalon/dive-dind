@@ -21,6 +21,10 @@ The [`run.sh`](./run.sh) script is a wrapper around dive that starts the DinD au
   ./run.sh clean
   ```
 
+### Limits
+The script disables the `build` command, as Dive uses a thin wrapper for legacy Docker builder.<br>
+Instead, build your image locally using Buildx and use the `local` command to transfer it to the DinD for diving.
+
 ## Manual execution
 ```sh
 docker compose up -d dive-dind

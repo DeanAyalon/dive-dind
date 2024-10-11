@@ -43,8 +43,7 @@ dive() {
         docker compose run -it --rm dive "$1"
 }
 
-# SCRIPT EXECUTION
-
+################################  SCRIPT EXECUTION  ################################
 # Context
 cd "$(dirname "$0")"
 
@@ -56,8 +55,8 @@ case "$1" in
         load "$2"
         dive "$2" ;;
     
-    # Copy dockerfile, dive build, delete
-    build ) echo Not yet supported, please copy the file to DinD and manually build it ; exit 1 ;;
+    # dive build is deprecated
+    build ) echo No longer supported, please build the image and use the 'local' command to dive ; exit 1 ;;
 
     # docker compose down -v
     clean ) 
