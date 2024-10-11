@@ -49,7 +49,6 @@ dive() {
 cd "$(dirname "$0")"
 
 [ -z "$1" ] && help && exit 1
-
 case "$1" in
     # docker save, docker cp, docker exec docker import
     local ) 
@@ -58,10 +57,11 @@ case "$1" in
         dive "$2" ;;
     
     # Copy dockerfile, dive build, delete
-    build ) echo Not yet supported, please copy the file to DinD manually ;;
+    build ) echo Not yet supported, please copy the file to DinD and manually build it ; exit 1 ;;
 
     # docker compose down -v
     clean ) 
-        docker compose down -v ; exit ;;
+        docker compose down -v ;;
+    
+    * ) create_dind ; dive $@ ;;
 esac
-
