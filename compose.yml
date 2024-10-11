@@ -1,0 +1,24 @@
+name: dive-dind
+services:
+  dive:
+    # use: docker compose run -it --rm dive [image]
+    image: jauderho/dive
+    container_name: dive
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  dive-dind:
+    # use:
+      # docker compose up -d dive-dind
+      # docker compose exec -it dive-dind docker compose run -it --rm dive [image]
+    image: docker
+    container_name: dive-dind
+    tty: true
+    privileged: true
+    volumes:
+      - dive:/var/lib/docker
+      - ./compose.yml:/compose.yml:ro
+
+volumes:
+  dive:
