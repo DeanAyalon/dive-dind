@@ -54,6 +54,9 @@ docker exec -it dive-dind \
 ```
 This repository just provides a convenient approach to managing it
 
+# Available Tags
+- **latest:** Gets the dive binary from the [wagoodman/dive](https://github.com/wagoodman/dive/releases/latest) GitHub releases
+- **jauderho:** Gets the dive binary from the [jauderho/dive](https://hub.docker.com/r/jauderho/dive) Docker image, as it lacks GitHub releases
 
 ## Featured Technologies
 [![Docker](https://img.shields.io/badge/docker-1D63ED?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/repository/docker/deanayalon/dive-dind)
