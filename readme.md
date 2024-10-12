@@ -56,7 +56,13 @@ This repository just provides a convenient approach to managing it
 
 # Available Tags
 - **latest:** Gets the dive binary from the [wagoodman/dive](https://github.com/wagoodman/dive/releases/latest) GitHub releases
+> `latest`, `wagoodman`, `gh`, `wagoodman-gh`
 - **jauderho:** Gets the dive binary from the [jauderho/dive](https://hub.docker.com/r/jauderho/dive) Docker image, as it lacks GitHub releases
+> `jauderho`, `jauderho-dh`
+- **dh:** Gets the dive binary from the [wagoodman/dive](https://hub.docker.com/r/wagoodman/dive) Docker image
+> `dh`, `wagoodman-dh`
+
+Docker Bake is ready for whatever other forks may occur
 
 ## Featured Technologies
 [![Docker](https://img.shields.io/badge/docker-1D63ED?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/repository/docker/deanayalon/dive-dind)

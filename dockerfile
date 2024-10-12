@@ -1,6 +1,7 @@
 FROM docker
 
 ARG TARGETARCH
+ARG SRC=wagoodman
 
 LABEL org.opencontainers.image.title="Dive-DinD"
 LABEL org.opencontainers.image.authors="Dean Ayalon - dev@deanayalon.com"
@@ -17,12 +18,12 @@ LABEL org.opencontainers.image.description="\
 
 WORKDIR /install
 RUN DIVE_VERSION=$(\
-        wget -qO- "https://api.github.com/repos/wagoodman/dive/releases/latest" | \
+        wget -qO- "https://api.github.com/repos/${SRC}/dive/releases/latest" | \
         grep '"tag_name":' | \
         sed -E 's/.*"v([^"]+)".*/\1/') && \
     FILE=dive_${DIVE_VERSION}_linux_${TARGETARCH}.tar.gz && \
     \
-    wget -O dive.tar.gz https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/${FILE} && \
+    wget -O dive.tar.gz https://github.com/${SRC}/dive/releases/download/v${DIVE_VERSION}/${FILE} && \
     tar xf dive.tar.gz && mv dive /usr/local/bin/ && \
     rm -rf /install
 WORKDIR /
