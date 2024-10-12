@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.description="\
     This image is based on the [Docker Dive tool](https://github.com/wagoodman/dive) \n\
     It was made as a temporary solution to Dive failing to locate blobs when when using the containerd image store. \n\
-    Running within its own Docker instance, it uses the docker image store and works as originally intended. \n\
+    Running within its own Docker instance, it uses the docker image store and works properly. \n\
     To use, start a privileged container, and then execute: \n\
         `docker exec -it [container] dive [image/command]` \n\
     \n\
