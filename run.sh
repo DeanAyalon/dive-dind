@@ -9,7 +9,7 @@ archive=img.tar         # Image archive name
 help() { cat help.txt; }
 
 create_dind() {
-    if [ -z "$(docker ps -f name=^dive-dind$)" ]; then
+    if [ -z "$(docker ps -qf name=^dive-dind$)" ]; then
         docker compose up -d dive-dind
         sleep 2     # Initalization
     fi
