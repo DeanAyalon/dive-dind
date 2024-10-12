@@ -2,16 +2,21 @@ variable "REPO" {
     default = "deanayalon/dive-dind"
 }
 
+group "default" {
+    targets = ["default"]
+}
 group "all" {
-    targets = ["default", "dhub"]
+    targets = ["default", "dockerhub"]
 }
 
+// Downloads from the GitHub Releases
 target "default" {
     dockerfile = "dockerfile"
     tags = [REPO, "ghcr.io/${REPO}"]
     platforms = ["linux/amd64", "linux/arm64/v8"]
 }
-target "dhub" {
+// Copies from Docker image
+target "dockerhub" {
     name = "dockerhub-${src}" 
     matrix = {
         src = ["wagoodman", "jauderho"]
