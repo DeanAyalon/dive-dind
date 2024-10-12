@@ -1,8 +1,7 @@
 ARG FORK=wagoodman
-FROM ${FORK}/dive as src
+FROM ${FORK}/dive AS dive
 
 FROM docker
-ARG FORK=wagoodman
 
 LABEL org.opencontainers.image.title="Dive-DinD"
 LABEL org.opencontainers.image.authors="Dean Ayalon - dev@deanayalon.com"
@@ -16,6 +15,5 @@ LABEL org.opencontainers.image.description="\
         `docker exec -it [container] dive [image/command]` \n\
     \n\
     A wrapper script, which offers easy local image transfer, can be found within the source repository"
-LABEL fork=${FORK}
 
-COPY --from=src /usr/local/bin/dive /usr/local/bin/
+COPY --from=dive /usr/local/bin/dive /usr/local/bin/

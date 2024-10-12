@@ -12,14 +12,14 @@ services:
     # use:
       # docker compose up -d dive-dind
       # docker compose exec -it dive-dind dive [image]
-    image: deanayalon/dive-dind${FORK:+:}$FORK
+    image: deanayalon/dive-dind
     build: 
-      dockerfile: dockerfile${FROM_IMG:+.dhub}
+      dockerfile: dockerfile
       platforms:
         - linux/amd64
         - linux/arm64/v8
       tags: 
-        - ghcr.io/deanayalon/dive-dind${FORK:+:}$FORK
+        - ghcr.io/deanayalon/dive-dind
     container_name: dive-dind
     tty: true
     privileged: true
