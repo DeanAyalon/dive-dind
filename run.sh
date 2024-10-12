@@ -9,9 +9,10 @@ archive=img.tar         # Image archive name
 help() { cat help.txt; }
 
 create_dind() {
-    [ -z "$(docker ps | grep dive-dind)" ] && \
-        docker compose up -d dive-dind && \
+    if [ -z "$(docker ps -f name=^dive-dind$)" ]; then
+        docker compose up -d dive-dind
         sleep 2     # Initalization
+    fi
 }
 # Save a local image and load it into DinD
 load() {
