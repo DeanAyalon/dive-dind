@@ -1,7 +1,7 @@
 name: dive-dind
 services:
   dive:
-    # use: docker compose run -it --rm dive [image]
+  #   # use: docker compose run -it --rm dive [image]
     image: jauderho/dive
     container_name: dive
     tty: true
@@ -11,14 +11,18 @@ services:
   dive-dind:
     # use:
       # docker compose up -d dive-dind
-      # docker compose exec -it dive-dind docker compose run -it --rm dive [image]
-    image: docker
+      # docker compose exec -it dive-dind dive [image]
+    image: deanayalon/dive-dind
+    build: 
+      platforms:
+        - linux/amd64
+        - linux/arm64/v8
+      tags: [ghcr.io/deanayalon/dive-dind]
     container_name: dive-dind
     tty: true
     privileged: true
     volumes:
       - dive:/var/lib/docker
-      - ./compose.yml:/compose.yml:ro
 
 volumes:
   dive:

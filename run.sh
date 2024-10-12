@@ -39,10 +39,7 @@ load() {
     docker exec dive-dind \
         docker load -i $archive
 }
-dive() {
-    docker exec -it dive-dind \
-        docker compose run -it --rm dive $@
-}
+dive() { docker exec -it dive-dind dive $@; }
 
 ################################  SCRIPT EXECUTION  ################################
 # Context
@@ -61,8 +58,7 @@ case "$1" in
     build ) echo No longer supported, please build the image and use the 'local' command to dive ; exit 1 ;;
 
     # docker compose down -v
-    clean ) 
-        docker compose down -v ;;
+    clean ) docker compose down -v ;;
     
     * ) create_dind ; dive $@ ;;
 esac
