@@ -41,7 +41,7 @@ load() {
 }
 dive() {
     docker exec -it dive-dind \
-        docker compose run -it --rm dive "$1"
+        docker compose run -it --rm dive $@
 }
 
 ################################  SCRIPT EXECUTION  ################################
