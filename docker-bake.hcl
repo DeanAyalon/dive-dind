@@ -1,9 +1,6 @@
 variable "REPO" {
     default = "deanayalon/dive-dind"
 }
-variable "FORK" {
-    default = "jauderho"
-}
 
 group "all" {
     targets = ["default", "dhub"]
@@ -15,13 +12,17 @@ target "default" {
     platforms = ["linux/amd64", "linux/arm64/v8"]
 }
 target "dhub" {
+    name = "dockerhub-${src}" 
+    matrix = {
+        src = ["wagoodman", "jauderho"]
+    }
     dockerfile = "dockerfile.dhub"
-    tags = ["${REPO}:${FORK}", "ghcr.io/${REPO}:${FORK}"]
+    tags = ["${REPO}:${src}", "ghcr.io/${REPO}:${src}"]
     args = {
-        FORK = FORK
+        SRC = src
     }
     labels = {
-        "wagoodman.dive.fork" = FORK
+        "dive.dockerhub.src" = "${src}/dive"
     }
     platforms = target.default.platforms
 }

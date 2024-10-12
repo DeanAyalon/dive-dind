@@ -1,5 +1,5 @@
-ARG FORK=wagoodman
-FROM ${FORK}/dive AS dive
+ARG SRC=wagoodman
+FROM ${SRC}/dive AS dive
 
 FROM docker
 
