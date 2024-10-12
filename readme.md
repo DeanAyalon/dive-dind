@@ -17,14 +17,14 @@ The DinD container runs the regular docker image store, with Docker's contents m
 
 # Use
 ## Script
-The [`run.sh`](./run.sh) script is a wrapper around dive that starts the DinD automatically and offers automation for the following features:
+The [`dive-dind`](./dive-dind) shell script is a wrapper around dive that starts the DinD automatically and offers automation for the following features:
 - **Local images:** Save a local image, load it into DinD and Dive
   ```sh
-  ./run.sh local [image]
+  dive-dind local [image]
   ```
 - **Clean:** Removes the DinD and volume, cleans up all stored images
   ```sh
-  ./run.sh clean
+  dive-dind clean
   ```
 
 ### Limits
@@ -54,15 +54,16 @@ docker exec -it dive-dind \
 ```
 This repository just provides a convenient approach to managing it
 
-# Available Tags
+# Available Versions
 - **latest:** Gets the dive binary from the [wagoodman/dive](https://github.com/wagoodman/dive/releases/latest) GitHub releases
-> `latest`, `wagoodman`, `gh`, `wagoodman-gh`
+> Tags: `latest`, `wagoodman`, `gh`, `wagoodman-gh`
 - **jauderho:** Gets the dive binary from the [jauderho/dive](https://hub.docker.com/r/jauderho/dive) Docker image, as it lacks GitHub releases
-> `jauderho`, `jauderho-dh`
+> Tags: `jauderho`, `jauderho-dh`
 - **dh:** Gets the dive binary from the [wagoodman/dive](https://hub.docker.com/r/wagoodman/dive) Docker image
-> `dh`, `wagoodman-dh`
+> Tags: `dh`, `wagoodman-dh`
 
-Docker Bake is ready for whatever other forks may occur
+Since the original creator stopped maintaining the image, this repository is not limited only to their releases.
+Docker Bake is ready for whatever other forks may release
 
 ## Featured Technologies
 [![Docker](https://img.shields.io/badge/docker-1D63ED?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/repository/docker/deanayalon/dive-dind)

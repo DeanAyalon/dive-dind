@@ -7,6 +7,23 @@ group "all" {
 }
 target "_common" {
     platforms = ["linux/amd64", "linux/arm64/v8"]
+    labels = {
+        "org.opencontainers.image.title"    = "Dive-DinD"
+        "org.opencontainers.image.authors"  = "Dean Ayalon - dev@deanayalon.com"
+        "org.opencontainers.image.source"   = "https://github.com/deanayalon/dive-dind"
+        "org.opencontainers.image.licenses" ="MIT"
+        "org.opencontainers.image.description" = <<EOF
+            This image is based on the [Docker Dive tool](https://github.com/wagoodman/dive) by wagoodman. \n
+            It was made as a temporary solution to Dive failing to locate blobs when when using the containerd image store. \n
+            Running within its own Docker instance, it uses the docker image store and works properly. \n
+            To use, start a privileged container, and then execute: \n
+                `docker exec -it [container] dive [image/command]` \n\n
+
+            A wrapper script, which offers easy local image transfer, can be found within the source repository.
+        EOF
+
+        "dive.original-author"  = "wagoodman @ https://github.com/wagoodman"
+    }
 }
 
 // Official repo
@@ -16,7 +33,6 @@ group "default" {
 target "github" {
     dockerfile = "dockerfile"
     inherits = ["_common"]
-    args = { src = "wagoodman" }
     tags = [
         "${REPO}",              "ghcr.io/${REPO}",
         "${REPO}:gh",           "ghcr.io/${REPO}:gh",
@@ -31,15 +47,10 @@ target "github" {
 target "dockerhub" {
     dockerfile = "dockerfile.dh"
     inherits = ["_common"]
-    args = { src = "wagoodman" }
     tags = [
         "${REPO}:dh",           "ghcr.io/${REPO}:dh",
         "${REPO}:wagoodman-dh", "ghcr.io/${REPO}:wagoodman-dh",
     ]
-    labels = {
-        "dive.src.registry" = "dockerhub"
-        "dive.src.repo" = "wagoodman/dive"
-    }
 }
 
 // Forks
@@ -60,10 +71,6 @@ target "gh-forks" {
     inherits = ["_common"]
     tags = ["${REPO}:${src}${tag}", "ghcr.io/${REPO}:${src}${tag}"]
     args = { SRC = src }
-    labels = {
-        "dive.src.registry" = "github"
-        "dive.src.repo" = "${src}/dive"
-    }
 }
 // Copies from Docker image
 target "dh-forks" {
@@ -79,12 +86,9 @@ target "dh-forks" {
     tags = [
         "${REPO}:${fork.src}-dh", 
         "ghcr.io/${REPO}:${fork.src}-dh",
-        fork.onlydh ? "${REPO}:${fork.src}" : "",               // No GH Releases - Use DockerHub as default source
+        // No GH Releases - Use DockerHub as default source:
+        fork.onlydh ? "${REPO}:${fork.src}" : "",
         fork.onlydh ? "ghcr.io/${REPO}:${fork.src}" : "",
     ]
     args = { SRC = fork.src }
-    labels = {
-        "dive.src.registry" = "dockerhub"
-        "dive.src.repo" = "${fork.src}/dive"
-    }
 }
