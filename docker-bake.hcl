@@ -12,6 +12,7 @@ group "all" {
 target "default" {
     dockerfile = "dockerfile"
     tags = [REPO, "ghcr.io/${REPO}"]
+    platforms = ["linux/amd64", "linux/arm64/v8"]
 }
 target "dhub" {
     dockerfile = "dockerfile.dhub"
@@ -22,4 +23,5 @@ target "dhub" {
     labels = {
         "wagoodman.dive.fork" = FORK
     }
+    platforms = target.default.platforms
 }
