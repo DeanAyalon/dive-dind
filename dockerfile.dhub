@@ -2,6 +2,7 @@ ARG FORK=wagoodman
 FROM ${FORK}/dive as src
 
 FROM docker
+ARG FORK=wagoodman
 
 LABEL org.opencontainers.image.title="Dive-DinD"
 LABEL org.opencontainers.image.authors="Dean Ayalon - dev@deanayalon.com"
