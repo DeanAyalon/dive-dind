@@ -1,0 +1,20 @@
+ARG FORK=wagoodman
+FROM ${FORK}/dive as src
+
+FROM docker
+
+LABEL org.opencontainers.image.title="Dive-DinD"
+LABEL org.opencontainers.image.authors="Dean Ayalon - dev@deanayalon.com"
+LABEL org.opencontainers.image.source="https://github.com/deanayalon/dive-dind"
+LABEL org.opencontainers.image.licenses="MIT"
+LABEL org.opencontainers.image.description="\
+    This image is based on the [Docker Dive tool](https://github.com/wagoodman/dive) \n\
+    It was made as a temporary solution to Dive failing to locate blobs when when using the containerd image store. \n\
+    Running within its own Docker instance, it uses the docker image store and works properly. \n\
+    To use, start a privileged container, and then execute: \n\
+        `docker exec -it [container] dive [image/command]` \n\
+    \n\
+    A wrapper script, which offers easy local image transfer, can be found within the source repository"
+LABEL fork=${FORK}
+
+COPY --from=src /usr/local/bin/dive /usr/local/bin/
