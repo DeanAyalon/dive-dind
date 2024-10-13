@@ -60,7 +60,8 @@ This repository just provides a convenient approach to managing it
 - **jauderho:** Gets the dive binary from the [jauderho/dive](https://hub.docker.com/r/jauderho/dive) Docker image, as it lacks GitHub releases
 > Tags: `jauderho`, `jauderho-dh`
 - **dh:** Gets the dive binary from the [wagoodman/dive](https://hub.docker.com/r/wagoodman/dive) Docker image
-> Tags: `dh`, `wagoodman-dh`
+> Tags: `dh`, `wagoodman-dh`<br>
+> Available only for AMD64
 
 Since the original creator stopped maintaining the image, this repository is not limited only to their releases.
 Docker Bake is ready for whatever other forks may release

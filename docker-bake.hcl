@@ -6,7 +6,6 @@ group "all" {
     targets = ["default", "forks"]
 }
 target "_common" {
-    platforms = ["linux/amd64", "linux/arm64/v8"]
     annotations = [
         "index,manifest:org.opencontainers.image.title=Dive-DinD",
         "index,manifest:org.opencontainers.image.authors=Dean Ayalon - dev@deanayalon.com",
@@ -48,6 +47,7 @@ target "github" {
         "dive.src.registry" = "github"
         "dive.src.repo" = "wagoodman/dive"
     }
+    platforms = ["linux/amd64", "linux/arm64/v8"]
 }
 target "dockerhub" {
     dockerfile = "dockerfile.dh"
@@ -56,6 +56,7 @@ target "dockerhub" {
         "${REPO}:dh",           "ghcr.io/${REPO}:dh",
         "${REPO}:wagoodman-dh", "ghcr.io/${REPO}:wagoodman-dh",
     ]
+    platforms = ["linux/amd64"]
 }
 
 // Forks
@@ -70,20 +71,26 @@ group "forks" {
 target "gh-forks" {
     name = "github-${src}${tag}"
     matrix = {
-        src = []
-        tag = ["", "-gh"]
+        fork = [] // [{ src: string, arm: bool, amd: bool }]
     }
     inherits = ["_common"]
-    tags = ["${REPO}:${src}${tag}", "ghcr.io/${REPO}:${src}${tag}"]
-    args = { SRC = src }
+    tags = [
+        "${REPO}:${src}${tag}",    "ghcr.io/${REPO}:${src}${tag}",
+        "${REPO}:${src}${tag}-gh", "ghcr.io/${REPO}:${src}${tag}-gh"
+    ]
+    args = { SRC = fork.src }
+    platforms = [
+        fork.amd ? "linux/amd64" : "", 
+        fork.arm ? "linux/arm64/v8" : ""
+    ]
 }
 // Copies from Docker image
 target "dh-forks" {
     name = "dockerhub-${fork.src}" 
     matrix = { 
         fork = [
-            // Repo namespace   No GitHub releases
-            { src = "jauderho", onlydh = true }
+            // Repo namespace   No GitHub releases   AMD64/ARM64
+            { src = "jauderho", onlydh = true, amd = true, arm = true }
         ]
     }
     inherits = ["_common"]
@@ -96,4 +103,8 @@ target "dh-forks" {
         fork.onlydh ? "ghcr.io/${REPO}:${fork.src}" : "",
     ]
     args = { SRC = fork.src }
+    platforms = [
+        fork.amd ? "linux/amd64" : "", 
+        fork.arm ? "linux/arm64/v8" : ""
+    ]
 }
