@@ -7,6 +7,11 @@ group "all" {
 }
 target "_common" {
     platforms = ["linux/amd64", "linux/arm64/v8"]
+    annotations = [
+        "index,manifest:org.opencontainers.image.title=Dive-DinD",
+        "index,manifest:org.opencontainers.image.authors=Dean Ayalon - dev@deanayalon.com",
+        "index,manifest:org.opencontainers.image.source=https://github.com/deanayalon/dive-dind"
+    ]
     labels = {
         "org.opencontainers.image.title"    = "Dive-DinD"
         "org.opencontainers.image.authors"  = "Dean Ayalon - dev@deanayalon.com"
