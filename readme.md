@@ -1,3 +1,19 @@
+# ARCHIVED
+The issue was solved in [Maddog2050's fork](https://github.com/Maddog2050/dive/tree/fix-oci-format)<br>
+To build the executable:
+```sh
+git clone https://github.com/Maddog2050/dive
+cd dive
+git switch fix-oci-format
+go build -o build/dive
+```
+This should create the updated `dive` binary in the `build` directory of the clone's repository<br>
+Afterwards, add to your PATH and enjoy :
+
+> This builds an unmarked binary, running `dive version` will return "dive No version provided"<br>
+> I am unsure how to fix that, I'm getting lost in the release process
+
+----
 # What Is This?
 This repository was made to easily run [Docker Dive](https://github.com/wagoodman/dive) from within Docker-in-Docker.<br>
 [![Source](https://img.shields.io/badge/Source-121011?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DeanAyalon/docker-bind-init)
