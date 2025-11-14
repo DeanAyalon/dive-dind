@@ -1,17 +1,6 @@
 # ARCHIVED
-The issue was solved in [Maddog2050's fork](https://github.com/Maddog2050/dive/tree/fix-oci-format)<br>
-To build the executable:
-```sh
-git clone https://github.com/Maddog2050/dive
-cd dive
-git switch fix-oci-format
-go build -o build/dive
-```
-This should create the updated `dive` binary in the `build` directory of the clone's repository<br>
-Afterwards, add to your PATH and enjoy :
-
-> This builds an unmarked binary, running `dive version` will return "dive No version provided"<br>
-> I am unsure how to fix that, I'm getting lost in the release process
+The issue was [solved](https://github.com/wagoodman/dive/pull/511) by Maddog2050 in November 2024<br>
+On March 2025, Alex Goodman, the original maker of Dive returned to actively maintain it. The solution was merged into `v0.13` and this little project became obsolete.
 
 ----
 # What Is This?
